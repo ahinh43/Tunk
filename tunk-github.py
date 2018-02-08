@@ -3,14 +3,14 @@ import os
 import asyncio
 import time
 
-# A very simple logging bot written for Ishana to log and print edited and deleted messages in a specfic channel. For PSO2 Team Orbital Ishana use only.
+# A very simple logging bot written for Ishana to log and print edited and deleted messages in a specfic channel. For Ishana use only.
 
 
 client = discord.Client()
 
 @client.event
 async def on_message_delete(message):
-    if message.channel.id == '313703862798385162' or message.channel.id == '164755663464038400' or message.channel.name.startswith('mpa') or message.server.id == '':
+    if message.channel.id == '313703862798385162' or message.channel.id == '164755663464038400' or message.channel.name.startswith('mpa') or message.server.id == '226835458552758275':
         return
     elif (message.author.bot):
         return
@@ -35,7 +35,7 @@ async def on_message_edit(before, after):
         return
     elif (before.author.bot):
         return
-    elif before.server.id == '':
+    elif before.server.id == '226835458552758275':
         return
     else:
         currentTime = time.strftime('%H:%M:%S')
@@ -43,31 +43,45 @@ async def on_message_edit(before, after):
 @client.event
 async def on_member_join(member):
     currentTime = time.strftime('%H:%M:%S')
+    if member.server.id == '226835458552758275':
+        return
     await client.send_message(client.get_channel('313703862798385162'), '`[' + str(currentTime) + ']` :inbox_tray: ' + '**' + member.name + '#' + member.discriminator + '** (ID: '+ member.id + ') has joined the server.')
 @client.event
 async def on_member_remove(member):
     currentTime = time.strftime('%H:%M:%S')
+    if member.server.id == '226835458552758275':
+        return
     await client.send_message(client.get_channel('313703862798385162'), '`[' + str(currentTime) + ']` :outbox_tray: ' + '**' + member.name + '#' + member.discriminator + '** (ID: '+ member.id + ') has left or been removed from the server.' + '\nAvatar: ' + member.avatar_url)
 @client.event
 async def on_member_update(before, after):
     currentTime = time.strftime('%H:%M:%S')
+    # if after.id == '153273725666590720' and after.server.id == '159184581830901761':
+        # for index in range(len(after.roles)):
+            # if after.roles[index].id == '357155081512026125':
+                # await client.remove_roles(after, after.roles[index])
     if before.nick == after.nick:
+        return
+    elif before.server.id == '226835458552758275':
         return
     else:
         await client.send_message(client.get_channel('313703862798385162'), '`[' + str(currentTime) + ']` :writing_hand: ' + '**{}**'.format(before.name) + ' has changed nicknames from **{}**'.format(before.nick) + ' to **{}**'.format(after.nick))
 @client.event
 async def on_member_ban(member):
     currentTime = time.strftime('%H:%M:%S')
+    if before.server.id == '226835458552758275':
+        return
     await client.send_message(client.get_channel('313703862798385162'), '`[' + str(currentTime) + ']` :hammer: ' + '**{}**'.format(member.name) + '(ID: {})'.format(member.id) + ' has been banned from the server.')
 @client.event
 async def on_member_unban(server, user):
     currentTime = time.strftime('%H:%M:%S')
+    if before.server.id == '226835458552758275':
+        return
     await client.send_message(client.get_channel('313703862798385162'), '`[' + str(currentTime) + ']` :hammer: ' + '**{}**'.format(user.name) + '(ID: {})'.format(user.id) + ' has been unbanned from the server.')
 @client.event
 async def on_message(message):
     if message.content.startswith('tunk.'):
         if message.content.lower() == 'tunk.shutdown':
-            if message.author.id == '':
+            if message.author.id == '153273725666590720':
                 await client.send_message(message.channel, 'Shutting down...')
                 await client.logout()
 @client.event
@@ -82,4 +96,6 @@ async def on_ready():
     print('------')
     await client.change_presence(game=discord.Game(name='always watching'))
     
-client.run('key')
+client.run('')
+
+# Requires Python 3.5 to run. Written by Tenj
