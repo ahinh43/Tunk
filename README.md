@@ -1,5 +1,5 @@
 # Tunk
-A bot for Phantasy Star Online 2 team Orbital Ishana to manage their Discord server.
+A bot that logs things, as well as an "automation utility" bot.
 
 This code is meant for reference.
-As this bot was written for only one team, I do not expect this bot to be able to run on another server.
+I can't see this bot running too well on other servers, as much of its features are written for specific servers in mind only.
